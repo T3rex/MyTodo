@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">MyTodo App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb  -2 mb-lg-0"> 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/about">about</a>
+        </li>      
+      </ul>
+      <form method="POST" class="d-flex">
+        {{searchform.search(class="form-control me-2", placeholder="Search title")}}
+        {{searchform.submit3(class="btn btn-outline-light btn-dark")}}
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container my-3">
+  <h2>Add a Task</h2>
+  <form method="POST" class="form-register">
+    {{form.hidden_tag()}}
+    {{ form.title1.label(class="form-label fs-3") }}
+    {{ form.title1(class="form-control", placeholder="Enter title") }}
+
+    {{ form.desc1.label(class="form-label fs-3 mt-3") }}
+    {{ form.desc1(class="form-control", placeholder="Enter Description" ) }}
+
+    {{ form.submit1(class="btn btn-md btn-block btn-dark my-3") }}
+
+  </form>
+</div>
+<div class="container my-3">
+  <h2>Your Todo List</h2>
+
+  {% if todoList|length==0 %}
+  <div class="alert alert-dark" role="alert">
+    You have nothing to do!!
+  </div>
+
+  {% else %}
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">SNo.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todoList %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.desc}}</td>
+        <td>{{todo.date_created}}</td>
+        <td>
+          <!-- <a href="/home" type="button" class="btn btn-sm btn-outline-success mx-1">Update</button> -->
+          <div class="modal fade" id="exampleModal-{{todo.sno}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Update your Todo</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" class="form-register">
+                  <div class="modal-body">
+
+                    {{ upform.sno2(value=todo.sno) }}
+                    <br>
+                    {{ upform.title2.label(class="form-label fs-4" ) }}
+                    {{ upform.title2(class="form-control", value=todo.title, id="update-title") }}
+
+                    {{ upform.desc2.label(class="form-label fs-4 mt-3") }}
+                    {{ upform.desc2(class="form-control",value=todo.desc,id="update-desc" ) }}
+
+                    {{ upform.submit2(class="btn btn-md btn-block btn-dark my-3") }}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <i class="glyphicon glyphicon-cloud"></i>
+
+          <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
+            data-bs-target="#exampleModal-{{todo.sno}}">
+            Edit
+          </button>
+          <a href="/delete/{{todo.sno}}" type="button" class="btn btn-sm btn-outline-danger">Delete</a></button>                       
+        </td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+
+
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

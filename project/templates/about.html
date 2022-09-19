@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">MyTodo App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb  -2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link active" href="/about">about</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-sm outer">
+  <h1>Welcome to MyTodo App</h1>
+  <h2 style="margin:25px"> Instructions</h2>
+  <ul class="list">
+    <li>
+      <h5>To add a task, fill the title and description then click on submit.</h5>
+    </li>
+    <li>
+      <h5>To delete a task, click on delete button infront of that todo.</h5>
+    </li>
+    <li>
+      <h5>To edit a task click on edit button and update by filling the pop up.</h5>
+    </li>
+    <li>
+      <h5>You can search a task by it's title on top right corner.</h5>
+    </li>
+    <li>
+      <h5>More features will be added soon.</h5>
+    </li>
+  </ul>
+  <h5>Made by: T3rex -<a href="https://github.com/T3rex/MyTodo" target="_blank" ><i>Source Code</i></a></h5>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<style>
+  
+  .outer {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;  
+    padding: 10px;    
+    border: 4px solid black;
+    width: fit-content  ;
+    border-radius: 50px;
+  }
+
+  .list {
+    align-self: center;
+  }
+  h5{
+    margin: 15px;
+  }
+  a{
+    text-decoration: none;
+  }
+</style>
+{% endblock script %}
+<script>
