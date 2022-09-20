@@ -16,12 +16,13 @@ def login():
         if user:
             if check_password_hash(user.password,password):
                 login_user(user, remember=True)
-                flash("You are logged in.",category="success")
+                flash("You are now logged in.",category="success")
                 return redirect('/')
             else:
                 flash("Incorrect password!!",category="danger")
         else:
             flash("This E-mail not registered.",category="danger") 
+            return redirect('/register')
     return render_template('login.html',form=login_Form, search=False)
 
 
@@ -46,11 +47,11 @@ def register():
                 user = User(email=email, password= generate_password_hash(password,method='sha256'))
                 db.session.add(user)
                 db.session.commit()
-                flash("Registeration successfull, You are logged in.",category="success")
+                flash("Registration successfull, You are now logged in.",category="success")
                 login_user(user,remember=True)
                 return redirect('/')
             else: 
-                flash("Passwords do not match! please try again.",category="warning")
+                flash("Passwords did not match!",category="warning")
                   
 
     return render_template('register.html',form=register_form, search=False)
@@ -60,6 +61,7 @@ def register():
 @login_required
 def logout():
     logout_user()
+    flash("You are now logged out", category="warning")
     return  redirect('/login')
 
 
