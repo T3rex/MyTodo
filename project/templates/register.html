@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="container my-3">
+  <h2>Register</h2>
+  <form method="POST" class="form-register">
+    {{form.hidden_tag()}}
+    {{ form.email.label(class="form-label fs-5") }}
+    {{ form.email(class="form-control", placeholder="Enter email") }}
+
+    {{ form.password.label(class="form-label fs-5") }}
+    {{ form.password(class="form-control", placeholder="Enter password") }}
+
+    {{ form.conf_password.label(class="form-label fs-5") }}
+    {{ form.conf_password(class="form-control", placeholder="Confirm password") }}
+    
+
+    {{ form.log_in(class="btn btn-md btn-block btn-dark my-3") }}
+  </form>
+</div>
+
+{% endblock content%}
